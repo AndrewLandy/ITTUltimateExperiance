@@ -1,21 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GUIControl : MonoBehaviour {
+public class GUIControl : MonoBehaviour
+{
+    // GameObject player = GameObject.Find("Player");
+    private Player player;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
-    void OnGui()
+    public void Start()
     {
-        if (GUI.Button(new Rect(10, 10, 150, 100), "I am a button")) ;
-        print("You clicked the button");
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
+    public void studyNormal()
+    {
+        player.StudyPoints += 5;
+    }
+
 }

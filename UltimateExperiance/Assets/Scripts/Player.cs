@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 
-    private int studyPoints;
-    private int socialPoints;
-    private float money;
+    public int studyPoints;
+    public int socialPoints;
+    public float money;
 
     public int StudyPoints
     {
