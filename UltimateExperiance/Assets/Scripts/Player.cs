@@ -15,6 +15,13 @@ public class Player : MonoBehaviour {
     private const string socialUp = "You spend some time with friends\nYou feel relaxed and had a great time!";
     private const string socialStay = "You spend some time with friends\nYou had a great time but couldn't shake the feeling you should have been working!";
 
+    private const int STUDY_VAL = 5;
+    private const int SOCIAL_VAL = 5;
+    private const float MONEY_LOW = 10.00f;
+    private const float MONEY_MID = 15.00f;
+    private const float MONEY_HIGH = 20.00F;
+    private const float GRANT = 336.11f;
+
     #region Attributes
     public int StudyPoints
     {
@@ -67,11 +74,11 @@ public class Player : MonoBehaviour {
 
     }
 
-    public void raiseStudy(int pointsGained)
+    public void raiseStudy()
     {
         if(StudyPoints < 100)
         {
-            StudyPoints += pointsGained;
+            StudyPoints += STUDY_VAL;
 
             gameText.text = studyUp;
         }
@@ -80,19 +87,21 @@ public class Player : MonoBehaviour {
         {
             gameText.text = studyStay;
         }
+
+        lowerSocial();
     }
 
-    public void lowerStudy(int pointsLost)
+    public void lowerStudy()
     {
         if(StudyPoints > 100)
-            StudyPoints -= pointsLost;
+            StudyPoints -= STUDY_VAL;
     }
 
-    public void raiseSoical(int pointsGained)
+    public void raiseSoical()
     {
         if (SocialPoints < 100)
         {
-            SocialPoints += pointsGained;
+            SocialPoints += SOCIAL_VAL;
             gameText.text = socialUp;
         }
 
@@ -100,21 +109,33 @@ public class Player : MonoBehaviour {
             gameText.text = socialStay;
     }
 
-    public void lowerSocial(int pointsLost)
+    public void lowerSocial()
     {
         if (SocialPoints > 0)
-        SocialPoints -= pointsLost;
+        SocialPoints -= SOCIAL_VAL;
     }
 
-    public void raiseMoney(float moneyGained)
+    public void raiseMoney()
     {
-        Money += moneyGained;
+        Money += GRANT; ;
     }
 
-    public void lowerMoney(float moneyLost)
+    public void lowerMoneyLow()
     {
         if (Money > 0)
-            Money -= moneyLost;
+            Money -= MONEY_LOW;
+    }
+
+    public void lowerMoneyMid()
+    {
+        if (Money > 0)
+            Money -= MONEY_MID;
+    }
+
+    public void lowerMoneyHigh()
+    {
+        if (Money > 0)
+            Money -= MONEY_HIGH;
     }
 
 }
