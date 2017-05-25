@@ -2,47 +2,42 @@
 using System.Collections;
 using UnityEngine.UI;
 using System;
+using System.Collections.Generic;
 
 public class GameMaster : MonoBehaviour {
 
     private Text gameText;
-    private IEnumerator CO_updateText;
-
-    delegate bool checkPress();
-    checkPress isPressed;
-
+    private List<String> narative = new List<String>();
+    int currentLine;
 
 	void Start () {
 
         gameText = GameObject.Find("txtGameText").GetComponent<Text>();
-        CO_updateText = updateText();
+        readNarative();
 
-        isPressed = pressCheckComp();
+        gameText.text = narative[0];
+        currentLine = 1;
 
-        StartCoroutine(CO_updateText);
-        
 
     }
-	
-    //This method should be called everytime the screen is pressed
-    private IEnumerator updateText()
+
+    void Update()
     {
+        if(pressCheckComp())
+        {
+            gameText.text = narative[currentLine];
+            currentLine++;
+        }
+    }
+ 
+    private void readNarative()
+    {
+        narative.Add("Congratulations on getting into the Institute of Technology, Tralee!\n" +
+                    "Tomorrow is your first day of college.");
 
-        gameText.text = "Congratulations on getting into the Institute of Technology, Tralee!\n" +
-            "Tomorrow is your first day of college.";
-        yield return new WaitUntil(() => isPressed());
+        narative.Add("Lets get you all setteled in.\nFirst things first, you need food. It's time to go to the shop!");
 
-        gameText.text = "Lets get you all setteled in.\nFirst things first, you need food. It's time to go to the shop!";
-        yield return new WaitUntil(() => isPressed());
-
-        gameText.text = "We should take this time to buy lots of food, so where not running to the shop every other day.";
-        //yield return new WaitUntil(() => isPressed());
-
-        //
-        // rest of game text
-        //
-
-
+        narative.Add("We should take this time to buy lots of food, so where not running to the shop every other day.");
     }
 
     private bool pressCheckMobile()
